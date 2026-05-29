@@ -1,22 +1,18 @@
+/* API URL */
+
+const API =
+"https://blog-platform1-wncj.onrender.com";
+
 /* PROTECT DASHBOARD */
 
 if(
-
-  window.location.pathname
-  .includes("dashboard.html")
-
+  window.location.pathname.includes("dashboard.html")
 ){
 
   const token =
   localStorage.getItem("token");
 
-  if(
-
-    !token ||
-
-    token === "undefined"
-
-  ){
+  if(!token || token === "undefined"){
 
     alert("Please Login First");
 
@@ -34,7 +30,7 @@ async function fetchPosts(){
   try{
 
     const response = await fetch(
-      "https://blog-platform1-wncj.onrender.com/api/users/signup/api/posts/all"
+      `${API}/api/posts/all`
     );
 
     posts = await response.json();
@@ -68,19 +64,19 @@ function displayPosts(){
 
     <div class="card">
 
-    <h4>👤 ${post.username}</h4>
+      <h4>👤 ${post.username}</h4>
 
       <h2>${post.title}</h2>
 
       <p>${post.content}</p>
 
       <button onclick="deletePost('${post._id}')">
-  Delete
-</button>
+        Delete
+      </button>
 
-<button onclick="editPost('${post._id}')">
-  Edit
-</button>
+      <button onclick="editPost('${post._id}')">
+        Edit
+      </button>
 
       <button onclick="likePost('${post._id}')">
         ❤️ Like (${post.likes})
@@ -110,53 +106,50 @@ function displayPosts(){
 
     `;
   });
-}
 
-/* UPDATE STATS */
+  /* UPDATE STATS */
 
-const totalPosts =
-document.getElementById("totalPosts");
+  const totalPosts =
+  document.getElementById("totalPosts");
 
-const totalLikes =
-document.getElementById("totalLikes");
+  const totalLikes =
+  document.getElementById("totalLikes");
 
-const totalComments =
-document.getElementById("totalComments");
+  const totalComments =
+  document.getElementById("totalComments");
 
-if(totalPosts){
+  if(totalPosts){
 
-  totalPosts.innerText =
-  posts.length;
+    totalPosts.innerText =
+    posts.length;
+  }
 
-}
+  if(totalLikes){
 
-if(totalLikes){
+    let likes = 0;
 
-  let likes = 0;
+    posts.forEach(post => {
 
-  posts.forEach(post => {
+      likes += post.likes;
+    });
 
-    likes += post.likes;
+    totalLikes.innerText =
+    likes;
+  }
 
-  });
+  if(totalComments){
 
-  totalLikes.innerText =
-  likes;
-}
+    let comments = 0;
 
-if(totalComments){
+    posts.forEach(post => {
 
-  let comments = 0;
+      comments +=
+      post.comments.length;
+    });
 
-  posts.forEach(post => {
-
-    comments +=
-    post.comments.length;
-
-  });
-
-  totalComments.innerText =
-  comments;
+    totalComments.innerText =
+    comments;
+  }
 }
 
 /* ADD POST */
@@ -179,8 +172,7 @@ async function addPost(){
   try{
 
     const response = await fetch(
-      "https://blog-platform1-wncj.onrender.com/api/posts/create",
-
+      `${API}/api/posts/create`,
       {
         method:"POST",
 
@@ -190,13 +182,13 @@ async function addPost(){
 
         body:JSON.stringify({
 
-  username:
-  localStorage.getItem("username"),
+          username:
+          localStorage.getItem("username"),
 
-  title,
+          title,
 
-  content
-})
+          content
+        })
       }
     );
 
@@ -253,35 +245,11 @@ function searchPosts(){
 
     <div class="card">
 
-    <h4>👤 ${post.username}</h4>
+      <h4>👤 ${post.username}</h4>
 
       <h2>${post.title}</h2>
 
       <p>${post.content}</p>
-
-      <button onclick="likePost('${post._id}')">
-        ❤️ Like (${post.likes})
-      </button>
-
-      <br><br>
-
-      <input
-        type="text"
-        id="comment-${post._id}"
-        placeholder="Write comment"
-      >
-
-      <button onclick="addComment('${post._id}')">
-        Add Comment
-      </button>
-
-      <div>
-
-        ${post.comments.map(comment => `
-          <p>💬 ${comment}</p>
-        `).join("")}
-
-      </div>
 
     </div>
 
@@ -295,8 +263,6 @@ function toggleDarkMode(){
 
   document.body.classList.toggle("dark");
 }
-
-/* ADD COMMENT */
 
 /* ADD COMMENT */
 
@@ -316,7 +282,7 @@ async function addComment(id){
 
     const response = await fetch(
 
-      `https://blog-platform1-wncj.onrender.com/api/users/signup/api/posts/comment/${id}`,
+      `${API}/api/posts/comment/${id}`,
 
       {
         method:"PUT",
@@ -356,7 +322,7 @@ async function deletePost(id){
 
     const response = await fetch(
 
-      `https://blog-platform1-wncj.onrender.com/api/users/signup/api/posts/delete/${id}`,
+      `${API}/api/posts/delete/${id}`,
 
       {
         method:"DELETE"
@@ -398,7 +364,7 @@ async function editPost(id){
 
     const response = await fetch(
 
-      `https://blog-platform1-wncj.onrender.com/api/users/signup/api/posts/edit/${id}`,
+      `${API}/api/posts/edit/${id}`,
 
       {
         method:"PUT",
@@ -436,15 +402,13 @@ async function editPost(id){
 
 /* LIKE POST */
 
-/* LIKE POST */
-
 async function likePost(id){
 
   try{
 
     const response = await fetch(
 
-      `https://blog-platform1-wncj.onrender.com/api/users/signup/api/posts/like/${id}`,
+      `${API}/api/posts/like/${id}`,
 
       {
         method:"PUT"
@@ -481,8 +445,7 @@ async function loginUser(){
   try{
 
     const response = await fetch(
-      "https://blog-platform1-wncj.onrender.com/api/users/signup/api/users/login",
-
+      `${API}/api/users/login`,
       {
         method:"POST",
 
@@ -504,14 +467,14 @@ async function loginUser(){
     if(data.message === "Login Successful"){
 
       localStorage.setItem(
-  "username",
-  data.user.username
-);
+        "username",
+        data.user.username
+      );
 
       localStorage.setItem(
-  "token",
-  data.token
-);
+        "token",
+        data.token
+      );
 
       window.location.href =
       "dashboard.html";
@@ -543,8 +506,7 @@ async function signupUser(){
   try{
 
     const response = await fetch(
-      "https://blog-platform1-wncj.onrender.com/api/users/signup/api/users/signup",
-
+      `${API}/api/users/signup`,
       {
         method:"POST",
 
@@ -564,8 +526,10 @@ async function signupUser(){
 
     alert(data.message);
 
-    if(data.message ===
-    "User Registered Successfully"){
+    if(
+      data.message ===
+      "User Registered Successfully"
+    ){
 
       window.location.href =
       "login.html";
@@ -584,6 +548,8 @@ async function signupUser(){
 /* LOGOUT USER */
 
 function logoutUser(){
+
+  localStorage.clear();
 
   alert("Logged Out");
 
