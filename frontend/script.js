@@ -179,7 +179,7 @@ async function addPost(){
   try{
 
     const response = await fetch(
-      "http://localhost:5000/api/posts/create",
+      "https://blog-platform1-wncj.onrender.com/api/posts/create",
 
       {
         method:"POST",
