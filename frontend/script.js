@@ -34,7 +34,7 @@ async function fetchPosts(){
   try{
 
     const response = await fetch(
-      "http://localhost:5000/api/posts/all"
+      "https://blog-platform1-wncj.onrender.com/api/users/signup/api/posts/all"
     );
 
     posts = await response.json();
@@ -316,7 +316,7 @@ async function addComment(id){
 
     const response = await fetch(
 
-      `http://localhost:5000/api/posts/comment/${id}`,
+      `https://blog-platform1-wncj.onrender.com/api/users/signup/api/posts/comment/${id}`,
 
       {
         method:"PUT",
@@ -356,7 +356,7 @@ async function deletePost(id){
 
     const response = await fetch(
 
-      `http://localhost:5000/api/posts/delete/${id}`,
+      `https://blog-platform1-wncj.onrender.com/api/users/signup/api/posts/delete/${id}`,
 
       {
         method:"DELETE"
@@ -398,7 +398,7 @@ async function editPost(id){
 
     const response = await fetch(
 
-      `http://localhost:5000/api/posts/edit/${id}`,
+      `https://blog-platform1-wncj.onrender.com/api/users/signup/api/posts/edit/${id}`,
 
       {
         method:"PUT",
@@ -444,7 +444,7 @@ async function likePost(id){
 
     const response = await fetch(
 
-      `http://localhost:5000/api/posts/like/${id}`,
+      `https://blog-platform1-wncj.onrender.com/api/users/signup/api/posts/like/${id}`,
 
       {
         method:"PUT"
@@ -481,7 +481,7 @@ async function loginUser(){
   try{
 
     const response = await fetch(
-      "http://localhost:5000/api/users/login",
+      "https://blog-platform1-wncj.onrender.com/api/users/signup/api/users/login",
 
       {
         method:"POST",
@@ -543,7 +543,7 @@ async function signupUser(){
   try{
 
     const response = await fetch(
-      "http://localhost:5000/api/users/signup",
+      "https://blog-platform1-wncj.onrender.com/api/users/signup/api/users/signup",
 
       {
         method:"POST",
