@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+  <title>Modern Blog Dashboard</title>
+
+  <link rel="stylesheet"
+  href="style.css">
+
+  <link rel="preconnect"
+  href="https://fonts.googleapis.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+  rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <h2>🚀 BlogApp</h2>
+
+    <nav>
+
+      <a href="dashboard.html">
+        🏠 Dashboard
+      </a>
+
+      <a href="index.html">
+        🌐 Home
+      </a>
+
+      <a href="#">
+        👤 Profile
+      </a>
+
+      <a href="#">
+        ⚙ Settings
+      </a>
+
+    </nav>
+
+    <button onclick="logoutUser()">
+      Logout
+    </button>
+
+  </aside>
+
+  <!-- MAIN -->
+
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+      <h1>
+        Welcome 👋
+      </h1>
+
+      <button onclick="toggleDarkMode()">
+        🌙 Dark Mode
+      </button>
+
+    </div>
+
+    <!-- STATS -->
+
+<section class="stats">
+
+  <div class="stat-card">
+    <h3 id="totalPosts">0</h3>
+    <p>Total Posts</p>
+  </div>
+
+  <div class="stat-card">
+    <h3 id="totalLikes">0</h3>
+    <p>Total Likes</p>
+  </div>
+
+  <div class="stat-card">
+    <h3 id="totalComments">0</h3>
+    <p>Total Comments</p>
+  </div>
+
+  <div class="stat-card">
+    <h3>Active</h3>
+    <p>Status</p>
+  </div>
+
+</section>
+
+    <!-- CREATE POST -->
+
+    <section class="create-post">
+
+      <h2>Create New Blog</h2>
+
+      <input
+        type="text"
+        id="title"
+        placeholder="Enter Blog Title"
+      >
+
+      <textarea
+        id="content"
+        placeholder="Write your content..."
+      ></textarea>
+
+      <button onclick="addPost()">
+        Publish Blog
+      </button>
+
+    </section>
+
+    <!-- SEARCH -->
+
+    <section class="search-section">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="🔍 Search Blogs"
+        onkeyup="searchPosts()"
+      >
+
+    </section>
+
+    <!-- POSTS -->
+
+    <section class="blogs">
+
+      <div id="posts"></div>
+
+    </section>
+
+  </main>
+
+  <script>
+
+const token =
+localStorage.getItem("token");
+
+if(
+
+  !token ||
+
+  token === "undefined"
+
+){
+
+  alert("Please Login First");
+
+  window.location.href =
+  "login.html";
+}
+
+</script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
